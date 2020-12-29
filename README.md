@@ -107,6 +107,7 @@ for game in games:
 We should be write a python bot.The bot should be stroll each page and collect each's data.To do , we have to detect number of links. 
 At below I detected them in variable called `pages `. -2 means , I extracted previous and next link from whole links.(code is reside at the below)
 
+Also you can store data that taken from web-server in data-frame. You can look at using at the below
 
 
 
@@ -126,7 +127,7 @@ soup = BeautifulSoup(r.content,"lxml")
 
 pages = len(soup.find("ul",attrs={"class":"pagination"}).find_all("li")) - 2
 
-df = pd.DataFrame(columns=["position","location","job_type","posted_time"])
+df = pd.DataFrame(columns=["position"])
 count = 0
 
 for page in range(1,pages+1): 
@@ -137,6 +138,7 @@ for page in range(1,pages+1):
     for job in jobs:
         position = job.h2.find("a").text
         print(position)
+        df.loc[count] = [position]
 ```
 
 The python bot , made request each pages.
