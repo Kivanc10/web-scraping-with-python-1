@@ -61,7 +61,14 @@ You should have libraries which reside at above . If you dont have them , you sh
 * `pip install lxml`
 
 ## Running the tests
+* Open an editor like anaconda or visual studio and run the file.
 
+#### Coding style tests
+
+* At first , I defined variable variable of url.It store web site's url. 
+* Then I made request to web server thanks to request module. After I made control to whether connect correctly or not. If code is 200 , it means process has been succesful.
+* After that , I parsed and prettify html code that taken from web server with bs4 and store them in variable called soup.
+* At last , I extracted pieces of informatin that I want from parsed code. As sample,I extract name of games. At below.
 ```
 import requests
 from bs4 import BeautifulSoup as bs
@@ -74,6 +81,7 @@ url = "https://store.steampowered.com/search/?specials=1"
 
 r = requests.get(url)
 
+print(r.status_code)
 soup = bs(r.content,"lxml")
 
 games = soup.find_all("div",attrs={"class":"responsive_search_name_combined"})
@@ -84,48 +92,60 @@ for game in games:
 ```
 
 
-* Sample result of web scraping
+* Sample result of web scraping-1
+
+
+![output_1](https://user-images.githubusercontent.com/51750773/103285674-de44e300-49ef-11eb-8213-d29f783079b0.png)
 
 
 
-`
-Counter-Strike: Global Offensive
 
-The Sims™ 4
+* If Multi-page exist , what will we doing
 
-Sea of Thieves
+![Ekran Görüntüsü (135)](https://user-images.githubusercontent.com/51750773/103286750-fcabde00-49f1-11eb-9891-4015d04b73c6.png)
 
-EA SPORTS™ FIFA 21
+We should be write a python bot.The bot should be stroll each page and collect each's data.To do , we have to detect number of links. 
+At below I detected them in variable called `pages `. -2 means , I extracted previous and next link from whole links.(code is reside at the below)
 
-Tom Clancy's Rainbow Six® Siege
 
-Euro Truck Simulator 2
 
-Red Dead Redemption 2
 
-Grand Theft Auto V
+```
+import requests
+from bs4 import BeautifulSoup
+import seaborn as sns
+import pandas as pd
 
-The Forest
+url = "https://www.python.org/jobs/"
 
-The Witcher® 3: Wild Hunt
+r = requests.get(url)
 
-Raft
+print(r.status_code)
 
-The Witcher 3: Wild Hunt - Game of the Year Edition
+soup = BeautifulSoup(r.content,"lxml")
 
-Rust
+pages = len(soup.find("ul",attrs={"class":"pagination"}).find_all("li")) - 2
 
-DARK SOULS™ III
+df = pd.DataFrame(columns=["position","location","job_type","posted_time"])
+count = 0
 
-Hades
+for page in range(1,pages+1): 
+    pageRequests = requests.get("https://www.python.org/jobs/?page=" + str(page))
+    print(pageRequests.url)
+    page_soup = BeautifulSoup(pageRequests.content,"lxml")
+    jobs = page_soup.find("div",attrs={"class","row"}).ol.find_all("li")
+    for job in jobs:
+        position = job.h2.find("a").text
+        print(position)
+```
 
-Fall Guys: Ultimate Knockout
+The python bot , made request each pages.
 
-The Elder Scrolls® Online
+![Ekran Görüntüsü (136)](https://user-images.githubusercontent.com/51750773/103287052-92476d80-49f2-11eb-893b-2ced7306eb38.png)
 
-DayZ
-`
+* As you see below , these are position of jobs that offered
+
+![Ekran Görüntüsü (138)](https://user-images.githubusercontent.com/51750773/103287386-742e3d00-49f3-11eb-8288-7802a620857e.png)
 
 
            
-
