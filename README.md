@@ -29,16 +29,24 @@ Second , I have visited `https://www.python.org/jobs/` to obtain new jobs datas.
 ## Installing
 
 You should have libraries which reside at above . If you dont have them , you should install them to use program.
+#### At first , python should be already installed in your device , if it is not , you should install python.
+
 * Open command prompt and write `python`
     * if you see `Python 3.7.0 (v3.7.0:1bf9cc5093, Jun 27 2018, 04:59:51) [MSC v.1914 64 bit (AMD64)] on win32` something like your device has already has python.
     * if you see `Python is not recognized as an internal or external command, operable program or batch file.` something like, you should install python. You can download <a href="https://www.python.org/downloads/">here</a>
 
-At first , python should be already installed in your device , if it is not , you should install python.
 
-
-At first , you should make control whether has pip3 or not. To verify whether pip was installed:
+#### Then , you should make control whether has pip3 or not. To verify whether pip was installed:
  * open cmd and enter `pip -V`.
+ 
     * if you see `pip 19.2.3 from c:\python27\lib\site-packages\pip (python 2.7)` something like.It means , you had pip3 already.You can pass run section.
+    
     * if you see `pip is not recognized as an internal or external command,Operable program or batch file` something like. You does not have pip3. You should install them.
-
+    
+           * Open command prompt and write `python get-pip.py`.Thanks to it , you will download get-pip.py
+           
+           * Then , verify to pip with `pip -V`.
+           
+           * Take advantages of latest facilities of python , write `python -m pip install --upgrade pip`
+           
 
