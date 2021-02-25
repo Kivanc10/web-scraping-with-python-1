@@ -69,7 +69,7 @@ You should have libraries which reside at above . If you dont have them , you sh
 * Then I made request to web server thanks to request module. After I made control to whether connect correctly or not. If code is 200 , it means process has been succesful.
 * After that , I parsed and prettify html code that taken from web server with bs4 and store them in variable called soup.
 * At last , I extracted pieces of informatin that I want from parsed code. As sample,I extract name of games. At below.
-```
+```Python
 import requests
 from bs4 import BeautifulSoup as bs
 import pandas as pd
@@ -111,7 +111,7 @@ Also you can store data that taken from web-server in data-frame. You can look a
 
 
 
-```
+```Python
 import requests
 from bs4 import BeautifulSoup
 import seaborn as sns
